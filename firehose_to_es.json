@@ -1,0 +1,60 @@
+{
+    "Version": "2012-10-17",  
+    "Statement": [    
+        {      
+            "Effect": "Allow",      
+            "Action": [
+                "s3:AbortMultipartUpload",
+                "s3:GetBucketLocation",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:ListBucketMultipartUploads",
+                "s3:PutObject"
+            ],      
+            "Resource": [        
+                "arn:aws:s3:::${bucket_name}",
+                "arn:aws:s3:::${bucket_name}/*"		    
+            ]    
+        },
+        {
+           "Effect": "Allow",
+           "Action": [
+               "es:DescribeElasticsearchDomain",
+               "es:DescribeElasticsearchDomains",
+               "es:DescribeElasticsearchDomainConfig",
+               "es:ESHttpPost",
+               "es:ESHttpPut"
+           ],
+          "Resource": [
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/*"
+          ]
+       },
+       {
+          "Effect": "Allow",
+          "Action": [
+              "es:ESHttpGet"
+          ],
+          "Resource": [
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/_all/_settings",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/_cluster/stats",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/${index_name}*/_mapping/${type_name}",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/_nodes",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/_nodes/stats",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/_nodes/*/stats",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/_stats",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/${index_name}*/_stats"
+          ]
+       },
+       {
+          "Effect": "Allow",
+          "Action": [
+              "es:*"
+          ],
+          "Resource": [
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}",
+              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/*"
+          ]
+       }
+    ]
+}
