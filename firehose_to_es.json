@@ -46,15 +46,17 @@
               "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/${index_name}*/_stats"
           ]
        },
-       {
-          "Effect": "Allow",
-          "Action": [
-              "es:*"
-          ],
-          "Resource": [
-              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}",
-              "arn:aws:es:${aws_region}:${account_id}:domain/${es_domain}/*"
-          ]
-       }
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "${s3_log_stream_arn}",
+                "${es_log_stream_arn}",
+                "${s3_log_stream_arn}/*",
+                "${es_log_stream_arn}/*"
+            ]
+        }
     ]
 }
